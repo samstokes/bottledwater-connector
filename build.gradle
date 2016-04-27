@@ -21,6 +21,18 @@ dependencies {
     testRuntime "org.slf4j:slf4j-log4j12:1.7.6"
 }
 
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+  baseName += '-fat'
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
+}
+
+task run(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  main = 'uk.co.samstokes.connect.bottledwater.Client'
+}
+
 task testJar(type: Jar) {
     classifier = 'test'
     from sourceSets.test.output

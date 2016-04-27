@@ -17,3 +17,4 @@ hs_err_pid*
 .gradle
 org.eclipse.jdt.core.prefs
 build
+.settings
